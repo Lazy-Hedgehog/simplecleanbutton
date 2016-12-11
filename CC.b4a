@@ -1,0 +1,173 @@
+﻿Version=6.3
+NumberOfModules=1
+Module1=Starter
+Build1=Default,com.lazyhedgehog.simplecleanbutton
+ManifestCode=AddManifestText(~\n~<uses-sdk android:minSdkVersion="9" android:targetSdkVersion="19"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~AddApplicationText(<service android:name="com.frozendevs.cache.cleaner.model.CleanerService"/>)~\n~'SetActivityAttribute(Main, android:theme, @android:style/Theme.Translucent.NoTitleBar)~\n~~\n~'************ Google Play Services Base ************~\n~AddApplicationText(~\n~   <activity android:name="com.google.android.gms.common.api.GoogleApiActivity"~\n~  android:theme="@android:style/Theme.Translucent.NoTitleBar"~\n~  android:exported="false"/>~\n~    <meta-data~\n~  android:name="com.google.android.gms.version"~\n~  android:value="@integer/google_play_services_version" />~\n~)~\n~'************ Google Play Services Base (end) ************~\n~~\n~'************ Firebase Base ************~\n~CreateResourceFromFile("google-services", "google-services.json")~\n~AddPermission(android.permission.ACCESS_NETWORK_STATE)~\n~AddPermission(android.permission.INTERNET)~\n~AddPermission(android.permission.WAKE_LOCK)~\n~AddPermission(com.google.android.c2dm.permission.RECEIVE)~\n~AddPermission(${applicationId}.permission.C2D_MESSAGE)~\n~AddManifestText( <permission android:name="${applicationId}.permission.C2D_MESSAGE"~\n~  android:protectionLevel="signature" />)~\n~AddApplicationText(~\n~<receiver~\n~  android:name="com.google.android.gms.measurement.AppMeasurementReceiver"~\n~  android:enabled="true">~\n~  <intent-filter>~\n~  <action android:name="com.google.android.gms.measurement.UPLOAD"/>~\n~  </intent-filter>~\n~  </receiver>~\n~~\n~  <service~\n~  android:name="com.google.android.gms.measurement.AppMeasurementService"~\n~  android:enabled="true"~\n~  android:exported="false"/>~\n~   <provider~\n~  android:authorities="${applicationId}.firebaseinitprovider"~\n~  android:name="com.google.firebase.provider.FirebaseInitProvider"~\n~  android:exported="false"~\n~  android:initOrder="100" />~\n~    <receiver~\n~  android:name="com.google.android.gms.measurement.AppMeasurementReceiver"~\n~  android:enabled="true">~\n~  <intent-filter>~\n~  <action android:name="com.google.android.gms.measurement.UPLOAD"/>~\n~  </intent-filter>~\n~  </receiver>~\n~~\n~  <service~\n~  android:name="com.google.android.gms.measurement.AppMeasurementService"~\n~  android:enabled="true"~\n~  android:exported="false"/>~\n~   <receiver~\n~  android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"~\n~  android:exported="true"~\n~  android:permission="com.google.android.c2dm.permission.SEND" >~\n~  <intent-filter>~\n~  <action android:name="com.google.android.c2dm.intent.RECEIVE" />~\n~  <action android:name="com.google.android.c2dm.intent.REGISTRATION" />~\n~  <category android:name="${applicationId}" />~\n~  </intent-filter>~\n~  </receiver>~\n~    <receiver~\n~  android:name="com.google.firebase.iid.FirebaseInstanceIdInternalReceiver"~\n~  android:exported="false" />~\n~~\n~~\n~  <service~\n~  android:name="com.google.firebase.iid.FirebaseInstanceIdService"~\n~  android:exported="true">~\n~  <intent-filter android:priority="-500">~\n~  <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />~\n~  </intent-filter>~\n~  </service>~\n~)~\n~'************ Firebase Base (end) ************~\n~~\n~'************ Firebase Ads ************~\n~AddApplicationText(~\n~  <activity~\n~  android:name="com.google.android.gms.ads.AdActivity"~\n~  android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"~\n~  android:theme="@android:style/Theme.Translucent" />~\n~  <activity android:name="com.google.android.gms.ads.purchase.InAppPurchaseActivity"~\n~  android:theme="@style/Theme.IAPTheme"/>~\n~)~\n~'************ Firebase Ads (end) ************
+IconFile=
+NumberOfFiles=3
+File1=fontawesome.ttf
+File2=robotoregular.ttf
+File3=robotothin.ttf
+NumberOfLibraries=5
+Library1=core
+Library2=cachecleaner
+Library3=fancybtn
+Library4=firebaseadmob
+Library5=markview
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: Simple Clean Button
+	#VersionCode: 2
+	#VersionName: 0.2
+	#SupportedOrientations: unspecified
+	#CanInstallToExternalStorage: False
+	
+	#AdditionalJar: com.android.support:support-v4
+	#AdditionalRes: ..\Resources
+	#DebuggerForceFullDeployment: true
+	#DebuggerForceStandardAssets: true
+#End Region
+
+#Region  Activity Attributes 
+	#FullScreen: False
+	#IncludeTitle: True
+#End Region
+
+Sub Process_Globals
+	'These global variables will be declared once when the application starts.
+	'These variables can be accessed from all modules.
+	Dim cc As CacheCleaner
+	Dim t As Timer
+End Sub
+
+Sub Globals
+	'These global variables will be redeclared each time the activity is created.
+	'These variables can only be accessed from this module.
+	Private BannerAd As AdView
+	Private FancyBtn1 As FancyBtn
+	Private MarkView1 As MarkView
+	
+	Dim s As Int
+	
+	Private active As Int = 1
+	
+	Dim l As List
+End Sub
+
+Sub Activity_Create(FirstTime As Boolean)
+	
+	cc.initialize("cc")
+	
+	s = 1
+	
+	Activity.Title = "Simple Clean Button"
+	Activity.Color = Colors.RGB(48,63,159)
+	
+	FancyBtn1.Initialize("fb","", 0, 1, True)
+	Activity.AddView(FancyBtn1, 50%x-80dip, 50%y-80dip, 160dip, 160dip)
+	FancyBtn1.TextSize = 20
+	FancyBtn1.Radius = 100dip
+	FancyBtn1.BackgroundColor = Colors.RGB(63,81,181)
+	FancyBtn1.Text = "Scan!"
+	
+	MarkView1.Initialize("mw")
+	MarkView1.RingColor = Colors.RGB(48,63,159)
+	MarkView1.RingWidth = 20dip
+	MarkView1.TextColor = Colors.Transparent
+	MarkView1.StrokeColors = Array As Int(Colors.RGB(68,138,255), Colors.RGB(68,138,255))
+	MarkView1.Max = 100
+	MarkView1.Mark = 100
+	Activity.AddView(MarkView1, 50%x-85dip, 50%y-85dip, 170dip, 170dip)
+	
+	BannerAd.Initialize2("BannerAd", "ca-app-pub-7621578077964403/1439130577", BannerAd.SIZE_SMART_BANNER)
+	
+	Dim height As Int
+   	If GetDeviceLayoutValues.ApproximateScreenSize < 6 Then
+    'Phones
+   	If 100%x > 100%y Then height = 32dip Else height = 50dip
+   	Else
+    'Tablets
+    	height = 90dip
+  	End If
+   
+    Activity.AddView(BannerAd, 0dip, 100%y - height, 100%x, height)
+    BannerAd.LoadAd
+	
+End Sub
+
+Sub fb_Click(v As Object, Tag As Object)
+	
+	If s = 1 Then
+		If v Is FancyBtn Then
+			MarkView1.Mark = 0
+			cc.ScanCache
+			Dim fb As FancyBtn = v
+			fb.Text = "Scanning..."
+		End If
+	End If
+	
+	If s = 2 Then
+		If v Is FancyBtn Then
+			MarkView1.Mark = 0
+			cc.CleanCache
+			Dim fb As FancyBtn = v
+			fb.Text = "Cleaning..."
+		End If
+	End If	
+	
+End Sub
+
+Sub cc_OnScanStarted
+	MarkView1.Max = 100
+	MarkView1.Mark = active
+	t.Initialize("Timer", 40)
+	t.Enabled = True
+End Sub
+
+Sub cc_onScanProgress (Current As Int, Total As Int)
+	
+End Sub
+
+Sub Timer_Tick
+	If active < MarkView1.Max Then 
+		active = active + 1
+	Else
+		t.Enabled = False
+	End If
+	MarkView1.Mark = active
+End Sub
+
+Sub cc_onScanCompleted (AppsList As Object)
+	l = AppsList
+	ToastMessageShow ("Cache of " & l.Size & " Apps found. Clean now!", True)	
+	MarkView1.Max = l.Size
+	FancyBtn1.Text = "Clean now!"
+	s = 2
+	MarkView1.Mark = l.Size
+	t.Enabled = False
+	active = 1
+End Sub
+
+Sub cc_onCleanStarted
+	t.Initialize("Timer", 30)
+	t.Enabled = True
+End Sub
+
+Sub cc_onCleanCompleted (CacheSize As Long)
+	Dim si As Long
+	si = CacheSize/1000000
+	ToastMessageShow (si & " MB Cache cleared!", True)	
+	FancyBtn1.Text = "Scan!"
+	s = 1
+	MarkView1.Max = 100
+	MarkView1.Mark = 100
+	t.Enabled = False
+End Sub
+
+Sub Activity_Resume
+
+End Sub
+
+Sub Activity_Pause (UserClosed As Boolean)
+
+End Sub

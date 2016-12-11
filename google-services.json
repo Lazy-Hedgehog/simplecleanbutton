@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "873714742060",
+    "firebase_url": "https://simple-clean-button.firebaseio.com",
+    "project_id": "simple-clean-button",
+    "storage_bucket": "simple-clean-button.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:873714742060:android:ca0b7c3483386f76",
+        "android_client_info": {
+          "package_name": "com.lazyhedgehog.simplecleanbutton"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "873714742060-ae37528m9v2n1q80hsq8nularouau6sg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCjOJVWOdC2xcaBWjUlxUEbU2pTfgegj0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
